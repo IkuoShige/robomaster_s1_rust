@@ -1,0 +1,79 @@
+[package]
+name = "robomaster-rust"
+version = "0.1.0"
+edition = "2021"
+authors = ["RoboMaster Rust Team"]
+description = "High-performance Rust library for RoboMaster S1 CAN control"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/your-repo/robomaster-rust"
+documentation = "https://docs.rs/robomaster-rust"
+keywords = ["robotics", "can", "robomaster", "control", "embedded"]
+categories = ["embedded", "hardware-support", "robotics"]
+readme = "README.md"
+
+[dependencies]
+# CAN communication
+socketcan = "3.1"
+can-socket = "0.2"
+
+# Async runtime
+tokio = { version = "1.35", features = ["full"] }
+futures = "0.3"
+
+# Error handling
+anyhow = "1.0"
+thiserror = "1.0"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Math and utilities
+num-traits = "0.2"
+byteorder = "1.5"
+bitflags = "2.4"
+
+# Gamepad/Joystick input
+gilrs = "0.10"
+
+# Configuration
+clap = { version = "4.4", features = ["derive"], optional = true }
+
+[dev-dependencies]
+# Testing
+criterion = { version = "0.5", features = ["html_reports"] }
+mockall = "0.12"
+tokio-test = "0.4"
+proptest = "1.4"
+tempfile = "3.8"
+
+# Examples section
+[[example]]
+name = "basic_control"
+path = "examples/basic_control.rs"
+
+[[example]]
+name = "joystick_control"
+path = "examples/joystick_control.rs"
+
+[[example]]
+name = "sensor_monitor"
+path = "examples/sensor_monitor.rs"
+
+[features]
+default = ["cli"]
+cli = ["dep:clap"]
+no-std = []
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 1

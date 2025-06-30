@@ -1,0 +1,80 @@
+# RoboMaster Embedded Joystick Control Configuration
+# 組み込み向けジョイスティック制御の設定ファイル
+# CPU使用率最適化版: 3-5% CPU使用率を目標
+
+[control]
+# 制御ループの周波数 (Hz) 
+# 最適化: 50Hz (滑らかな制御のため)
+#control_frequency = 50
+control_frequency = 10
+
+# タッチコマンドの周波数 (Hz)
+# より高い応答性のため10Hzに増加
+touch_frequency = 1
+
+# デッドゾーンの閾値 (0.0 - 1.0)
+deadzone_threshold = 0.08
+
+# 最大速度 (0.0 - 1.0)
+max_speed = 1.0
+
+# 軸変化の最小閾値
+# 最適化: より敏感な制御のため0.003に削減
+axis_change_threshold = 0.003
+
+[connection]
+# CAN インターフェース名
+can_interface = "can0"
+
+# 接続タイムアウト (ms)
+connection_timeout_ms = 5000
+
+# 復旧時の遅延 (ms)
+recovery_delay_ms = 1000
+
+# 最大初期化試行回数
+max_init_attempts = 3
+
+# エラー回復を開始するエラー数
+recovery_error_threshold = 5
+
+[system]
+# ログレベル (error, warn, info, debug, trace)
+log_level = "warn"
+
+# ステータス報告間隔 (秒)
+status_interval_sec = 30
+
+# 自動再起動の有効化
+auto_restart = true
+
+# 再起動までの待機時間 (秒)
+restart_delay_sec = 3
+
+[gamepad]
+# 使用するゲームパッドのインデックス (0から開始)
+gamepad_index = 0
+
+# ボタンマッピング
+emergency_stop_button = "South"    # A button
+resume_button = "East"             # B button  
+status_button = "North"            # Y button
+
+# 軸マッピング
+forward_backward_axis = "LeftStickY"
+left_right_axis = "LeftStickX"
+rotation_axis = "RightStickY"
+
+# Y軸反転
+invert_forward_backward = true
+invert_rotation = false
+
+[led]
+# LED制御の有効化
+enable_led_control = true
+
+# ステータス表示用LED色
+ready_color = "green"
+emergency_color = "red"
+warning_color = "yellow"
+off_color = "off"
